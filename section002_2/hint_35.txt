@@ -1,0 +1,5 @@
+inspect로 알수 있는 것중 몇가지를 짚어준다.
+ExposedPorts
+Env
+OS
+레이어
