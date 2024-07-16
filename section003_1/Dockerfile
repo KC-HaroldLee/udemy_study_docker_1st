@@ -60,9 +60,33 @@ COPY app_ref .
 # requireStack: [ '/app/server.js' ]
 # 그건 KISA 다녀와서~
 
+# KISA다녀옴
+# 그렇다면 COPY로도 /app이 있고 볼륨으로도 /app이 있다면??
+# 그렇다고 도커가 호스트 데이터에 덮어쓰지는 않는다. (당연히 그래야 하지!)
+# 대신 컨테이너 내부 파일 시스템 특정부분에 뭔가 있다는 것을 알려는 줘야한다.
+# 즉 외부에서 덮어쓰지 말아야 할 부분을 이야기 해줘야한다.
+# 이럴때 익명의 볼륨을 사용한다. 예를들어 /app/node_modules 폴더를 살리기 위해 아래와 같은 명령어로 실행이 된다.
+# (...) -v (...)/section003_1/app_ref:/app/feedback 1d -v /app/node_modules
+# -v /app/node_modules 은 일종의 예외라고 할 수 있다.
+# 결과적으로 웹앱 코드도 바로 갱신되고 /app/node_modules 폴더도 유지할 수 있다.
+
+# (이걸 왜 하지?)
+# 하지만 컨테이너가 아니라 웹서버만 다시 실행해야 할때가 있다.
+# 이는 node에만 해당 되는 것이 아니므로... 
+# 그런데 nodemon을 추가하여 해결했으므로 각 웹서버에 맞는 것을 해야할 듯싶다.
+# 적용실습은 안해봄
+
+# ARG
+ARG DEFAULT_PORT = 80
+
+# ENV
+# ENV PORT 80
+ENV PORT $DEFAULT_PORT
+
 
 # server.js app.listen(80); 참고하기
-EXPOSE 80
+# EXPOSE 80
+EXPOSE $PORT
 
 CMD ["node", "server.js"]
 
