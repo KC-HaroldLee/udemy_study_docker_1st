@@ -1,0 +1,16 @@
+# 리엑트 지식 좀 필요한가봄...
+FROM node
+
+WORKDIR /app
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+# 컨테이너가 생성될때마다 트리거되어야하는 명령을 지정
+# package.json 을 참고할 것
+CMD ["npm", "start"]

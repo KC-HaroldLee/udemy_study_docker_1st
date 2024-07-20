@@ -1,0 +1,12 @@
+일단 몽고하나 만들고
+docker run -d --name mongodb_cont --network -p 27017:27017 chomnet mongo
+참고로 몽고 공식 이미지는 27017를 이미 expose하고 있다. 그리고 아래메시지를 받을 수 있었음
+CONNECTED TO MONGODB
+
+app.js
+  // 'mongodb://localhost:27017/course-goals', // 컨테이너 localhost면 안 되니까
+'mongodb://host.docker.internal:27017/course-goals', // host.docker.internal 이렇게 돌아간다
+
+##############################
+####### 아쉽게도 리액트 에러로 3중컨테이너 실습은 못함
+##############################

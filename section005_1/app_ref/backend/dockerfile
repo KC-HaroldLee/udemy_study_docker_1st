@@ -1,0 +1,14 @@
+FROM node
+
+WORKDIR /app
+
+COPY package.json .
+
+RUN npm install
+
+# 폴더 구조가 다른 섹션과 달라짐
+COPY . .  
+
+EXPOSE 80
+
+CMD ["node", "app.js"]
